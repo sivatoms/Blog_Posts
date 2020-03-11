@@ -1,10 +1,15 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from django.contrib.auth.views import LoginView, LogoutView
+
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from .forms import Post_Form, Post_Edit
 from .models import Post
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
+
+from django.views.generic import TemplateView
 # Create your views here.
 '''
 def home(request):
@@ -65,3 +70,13 @@ def edit_post(request,id):
     else:
         form = Post_Edit(instance=post)    
         return render(request, 'posts_t/post_edit.html', {'form':form})
+
+def signup(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post_list')
+    else:
+        form = UserCreationForm()
+    return render(request, 'registration/signup.html', {'form':form})
