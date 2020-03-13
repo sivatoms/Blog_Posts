@@ -26,26 +26,30 @@
                                 <li class="nav-item active">
                                         <a class="nav-link" href="{% url 'post_form' %}">Post<span class="sr-only">(current)</span></a>
                                 </li>                                    
+                                
+                                </ul>                               
                                 {% if user.is_authenticated %}
                                 <li class="nav-item active">
-                                        <a class="nav-link" href="{% url 'logout' %}">Logout<span class="sr-only">(current)</span></a>
+                                        <a class="nav-link" href="{% url 'logout' %}" class="btn btn-outline-Danger">Logout<span class="sr-only">(current)</span></a>
                                 </li>
                                 {% else %}
                                 
                                 <li class="nav-item active">
-                                        <a href="{% url 'login' %}" class="btn btn-outline-info mr-2">Log in</a>
+                                        <a href="{% url 'login' %}" class="btn btn-outline-info">Log in</a>
                                 </li>  
                                 <li class="nav-item active">
-                                        <a href="{% url 'signup' %}" class="btn btn-outline-primary ml-2 mr-2">Register<span class="sr-only">(current)</span></a>
+                                        <a href="{% url 'signup' %}" class="btn btn-outline-primary ">Register<span class="sr-only">(current)</span></a>
                                 </li>                 
                                 {% endif %}  
-                                </ul>
-                                <form class="form-inline my-2 my-lg-0" method='GET' action=''>
-                                        <input class="form-control mr-sm-2" type="search" name='q' placeholder="Search posts" aria-label="Search" value='{{ reuqest.GET.q }}'>
-                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                                </form>
                         </div>
                 </nav>
+                <br>
+                <div class="input-group mb-2">
+                        <form class="form-inline " method='GET' action=''>
+                                <input class="form-control mr-2 rounded" type="search" name='q' placeholder="Search posts" aria-label="Search" value='{{ reuqest.GET.q }}'>
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                </div>
                 <br>
 
                 {% block body %}
