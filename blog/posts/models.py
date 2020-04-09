@@ -11,5 +11,5 @@ class Post(models.Model):
 
     # order posts
     class Meta:
-        ordering = ['-post_date']
+        ordering = ['-id']
     

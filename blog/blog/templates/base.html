@@ -23,33 +23,47 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active">
-                                        <a class="nav-link" href="{% url 'post_form' %}">Post<span class="sr-only">(current)</span></a>
-                                </li>                                    
-                                
-                                </ul>                               
                                 {% if user.is_authenticated %}
-                                <li class="nav-item active">
-                                        <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout<span class="sr-only">(current)</span></a>
-                                </li>
+                                        <li class="nav-item active ml-1">
+                                                <a class="nav-link" href="{% url 'post_form' %}">Add Post<span class="sr-only">(current)</span></a>
+                                        </li>   
+                                         <li class="nav-item active ml-1">
+                                                <a class="nav-link" href="{% url 'add_bills_home' id=user.id%}">Add bills<span class="sr-only">(current)</span></a>
+                                        </li>    
+                                        <li class="nav-item active ml-1">
+                                                <a class="nav-link" href="{% url 'balance_details' id=user.id%}">Balances<span class="sr-only">(current)</span></a>
+                                        </li>                               
+                                {% endif %}
+                                </ul>
+                                <ul class="navbar-nav ml-auto">
+                                {% if user.is_authenticated %}
+                                        <li class="nav-item">
+                                                <a class="nav-link disabled mr-3 text-light" tabindex="-1" aria-disabled="true">Welcome {{ user.username|upper }}</a>
+                                        </li>        
+                                        <li class="nav-item active">
+                                                <a href="{% url 'logout' %}" class="btn btn-outline-danger">Logout<span class="sr-only">(current)</span></a>
+                                        </li>
                                 {% else %}
                                 
-                                <li class="nav-item active">
-                                        <a href="{% url 'login' %}" class="btn btn-outline-info">Log in</a>
-                                </li>  
-                                <li class="nav-item active">
-                                        <a href="{% url 'signup' %}" class="btn btn-outline-primary ">Register<span class="sr-only">(current)</span></a>
-                                </li>                 
+                                        <li class="nav-item active">
+                                                <a href="{% url 'login' %}" class="btn btn-outline-info mr-2 ">Log in</a>
+                                        </li>  
+                                        <li class="nav-item active">
+                                                <a href="{% url 'signup' %}" class="btn btn-outline-primary ">Register<span class="sr-only">(current)</span></a>
+                                        </li>                 
                                 {% endif %}  
+                        </ul>
                         </div>
                 </nav>
                 <br>
+                {% if user.is_authenticated %}
                 <div class="input-group mb-2">
                         <form class="form-inline " method='GET' action=''>
-                                <input class="form-control mr-2 rounded" type="search" name='q' placeholder="Search posts" aria-label="Search" value='{{ reuqest.GET.q }}'>
+                                <input class="form-control mr-2 rounded" type="search" name='q' placeholder="Search here..." aria-label="Search" value='{{ reuqest.GET.q }}'>
                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                 </div>
+                {% endif %} 
                 <br>
 
                 {% block body %}
