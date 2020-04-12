@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+    <h5>Create a group</h5>
+    <hr>
+    {% if group %}
+        
+    {% endif %}
+    <form method='post'>
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type='submit' name='delete' class='btn btn-outline-success'>Create group</button>
+           
+        </form>
+{% endblock %}
